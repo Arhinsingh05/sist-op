@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas Operativos PRO</title>
+<style>
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top,#0a0f2c,#020617);
+  color:#e0f7ff;
+}
+header{
+  text-align:center;
+  padding:30px;
+  font-size:32px;
+  font-weight:bold;
+  text-shadow:0 0 20px #00e5ff;
+}
+.container{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+button{
+  margin:10px;
+  padding:15px 20px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(45deg,#00e5ff,#2979ff);
+  color:white;
+  cursor:pointer;
+  box-shadow:0 0 15px #00e5ff;
+  transition:0.3s;
+}
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px #00e5ff;
+}
+.card{
+  display:none;
+  margin:20px;
+  padding:25px;
+  border-radius:15px;
+  width:80%;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 25px rgba(0,229,255,0.3);
+  animation:fade 0.8s;
+}
+img{
+  width:180px;
+  margin:10px;
+  border-radius:10px;
+}
+.imagen {
+  width: 400px;
+}
+.imagen2 {
+  width: 800px;
+}
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+#final{
+  display:none;
+  text-align:center;
+  font-size:28px;
+  margin:40px;
+}
+.confetti{
+  position:fixed;
+  width:10px;
+  height:10px;
+  background:red;
+  top:0;
+  animation:fall 3s linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(100vh) rotate(360deg)}
+}
+footer{
+  text-align:center;
+  margin:20px;
+}
+</style>
+</head>
+<body><header>💻 Sistemas Operativos</header><div class="container">
+<button onclick="toggle('multiusuario')">Multiusuario</button>
+<button onclick="toggle('multiprocesamiento')">Multiprocesamiento</button>
+<button onclick="toggle('compatibilidad')">Compatibilidad</button>
+<button onclick="toggle('tipos')">Tipos de S.O.</button>
+<button onclick="toggle('usos')">Usos</button>
+<button onclick="toggle('apps')">Aplicaciones</button>
+<button onclick="window.location.href='windows.html'">Windows</button>
+</div><div id="multiusuario" class="card">
+<h2>👥 Sistema Multiusuario</h2>
+<p><b>Concepto Fundamental:</b> Un sistema operativo multiusuario permite que múltiples usuarios accedan y utilicen simultáneamente los recursos de una sola computadora o servidor, cada uno con su propia sesión y datos protegidos.</p>
+<p><b>Funcionamiento Técnico:</b></p>
+<ul>
+<li>El sistema operativo asigna slots de tiempo (time slicing) a cada usuario para que ejecute sus procesos.</li>
+<li>Cada usuario tiene un identificador único (UID) y una cuenta de seguridad independiente.</li>
+<li>La memoria se particiona para aislar el espacio de cada usuario evitando que interfieran entre sí.</li>
+<li>El kernel gestiona permisos de acceso y protege los datos privados de cada usuario.</li>
+</ul>
+<p><b>Características Principales:</b></p>
+<ul>
+<li><b>Seguridad:</b> Cada usuario tiene credenciales de autenticación (usuario/contraseña).</li>
+<li><b>Privacidad:</b> Los archivos de un usuario no son visibles por defecto para otros usuarios.</li>
+<li><b>Concurrencia Controlada:</b> Múltiples procesos se ejecutan en paralelo de forma ordenada.</li>
+<li><b>Administración de Recursos:</b> Cuotas de disco, CPU y memoria por usuario.</li>
+<li><b>Sesiones Independientes:</b> Cada usuario tiene su propio desktop virtual, variables de entorno y preferencias.</li>
+</ul>
+<p><b>Tipos de Acceso Multiusuario:</b></p>
+<ul>
+<li><b>Local:</b> Múltiples usuarios en terminales conectadas directamente al servidor.</li>
+<li><b>Remoto:</b> Usuarios accediendo vía SSH, RDP o protocolos de red desde máquinas distintas.</li>
+<li><b>Híbrido:</b> Combinación de acceso local y remoto en entornos corporativos.</li>
+</ul>
+<p><b>Ejemplos de Sistemas Multiusuario:</b> Linux, Unix, macOS Server, Windows Server, Solaris. En la actualidad, incluso Windows 10/11 soporta multiusuario aunque típicamente se usa en modo monousuario.</p>
+<img src="https://cdn-icons-png.flaticon.com/512/1995/1995574.png">
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+</div><div id="multiprocesamiento" class="card">
+<h2>⚙️ Multiprocesamiento</h2>
+<p><b>Concepto Fundamental:</b> El multiprocesamiento se refiere al uso de dos o más procesadores (CPUs) dentro de una misma computadora para ejecutar procesos e hilos de manera verdaderamente paralela, no solo intercalada.</p>
+<p><b>Diferencia con Multitarea:</b></p>
+<ul>
+<li><b>Multitarea:</b> Un solo procesador cambia rápidamente entre tareas (context switching). Es simultánea en apariencia pero secuencial en realidad.</li>
+<li><b>Multiprocesamiento:</b> Múltiples procesadores ejecutan verdaderamente en paralelo. Dos tareas se ejecutan simultáneamente en dos CPUs diferentes.</li>
+</ul>
+<p><b>Funcionamiento Técnico:</b></p>
+<ul>
+<li>Cada CPU tiene su propia cache y registros, conectados a una memoria compartida.</li>
+<li>El sistema operativo distribuye procesos entre CPUs según disponibilidad y políticas de scheduling.</li>
+<li>Se requiere sincronización mediante candados (locks) y semáforos para acceso a recursos compartidos.</li>
+<li>El kernel mantiene una cola de procesos listos para ejecutar en cada CPU.</li>
+</ul>
+<p><b>Tipos de Multiprocesamiento:</b></p>
+<img src="/asset/01.jpg" class="imagen2">
+<ul>
+<li><b>Simétrico (SMP):</b> Todos los procesadores son iguales y pueden ejecutar cualquier proceso. El más común en sistemas modernos.</li>
+<li><b>Asimétrico:</b> Un procesador (master) controla a otros (slave) que solo ejecutan tareas específicas asignadas.</li>
+</ul>
+<p><b>Ventajas del Multiprocesamiento:</b></p>
+<ul>
+<li>Rendimiento superior: Ejecución verdaderamente paralela aumenta throughput.</li>
+<li>Escalabilidad: Se pueden agregar más CPUs para mejorar rendimiento.</li>
+<li>Resiliencia: Si falla una CPU, otras continúan funcionando.</li>
+<li>Ideal para aplicaciones intensivas (bases de datos, servidores web, análisis científico).</li>
+</ul>
+<p><b>Aplicaciones Modernas:</b> Servidores de datos centers, computadoras científicas, sistemas HPC (High Performance Computing), videojuegos, procesamiento de imágenes, inteligencia artificial.</p>
+<img src="/asset/2.jpg" class="imagen">
+<img src="/asset/3.jpg" class="imagen">
+</div><div id="compatibilidad" class="card">
+<h2>⚠️ Compatibilidad en Sistemas Operativos</h2>
+<p><b>Concepto Fundamental:</b> La compatibilidad se refiere a la capacidad de un sistema operativo de ejecutar software diseñado para versiones anteriores o de diferentes sistemas, así como soportar hardware variado.</p>
+<p><b>Tipos de Compatibilidad:</b></p>
+<ul>
+<li><b>Compatibilidad Hacia Atrás (Backward Compatibility):</b> Una versión nueva del SO puede ejecutar programas diseñados para versiones antiguas.</li>
+<li><b>Compatibilidad Hacia Adelante (Forward Compatibility):</b> Software nuevo puede funcionar en sistemas antiguos (raro de lograr).</li>
+<li><b>Compatibilidad de Hardware:</b> Soporte de drivers para dispositivos periféricos variados (impresoras, tarjetas de red, etc.).</li>
+<li><b>Compatibilidad de Binarios:</b> La capacidad de ejecutar código compilado sin recompilación.</li>
+</ul>
+<p><b>Problemas de Compatibilidad Comunes:</b></p>
+<ul>
+<li><b>Cambios de Arquitectura:</b> Transición de 32 a 64 bits. Software de 32 bits puede funcionar en sistemas 64 bits pero con limitaciones.</li>
+<li><b>Cambios de API:</b> Las funciones disponibles para programadores cambian entre versiones, rompiendo código antiguo.</li>
+<li><b>Cambios de Sistema de Archivos:</b> De FAT32 a NTFS. Sistemas antiguos no pueden leer archivos en formatos nuevos.</li>
+<li><b>Obsolescencia de Periféricos:</b> Drivers antiguos dejan de funcionar en hardware moderno.</li>
+<li><b>Dependencias de Librerías:</b> Software que requiere versiones específicas de DLLs que no están disponibles.</li>
+</ul>
+<p><b>Ejemplos de Falta de Compatibilidad:</b></p>
+<ul>
+<li>Software de Windows XP no funciona en Windows 11 64 bits sin modo de compatibilidad.</li>
+<li>Impresoras antiguas no tienen drivers para sistemas operativos recientes.</li>
+<li>Videojuegos de arquitectura 16 bits no se ejecutan en sistemas modernos.</li>
+<li>Aplicaciones macOS de Intel no funcionan nativamente en Apple Silicon sin traducción.</li>
+</ul>
+<p><b>Impacto Empresarial:</b> Migración costosa de sistemas antiguos, mantenimiento de múltiples versiones, pérdida de productividad durante transiciones.</p>
+<p><b>Soluciones de Compatibilidad:</b></p>
+<ul>
+<li><b>Modo de Compatibilidad:</b> Windows permite ejecutar programas antiguos con configuraciones especiales.</li>
+<li><b>Máquinas Virtuales:</b> Emulación de SO antiguos para ejecutar software legacy.</li>
+<li><b>Wine/Proton:</b> Capas de compatibilidad para ejecutar Windows en Linux.</li>
+<li><b>Traducción Dinámica:</b> Apple Rosetta traduce código Intel a ARM en tiempo real.</li>
+</ul>
+<img src="/asset/compatibilidad.png" class="imagen">
+</div><div id="tipos" class="card">
+<h2>📊 Tipos de Sistemas Operativos</h2>
+<p><b>Clasificación por Número de Usuarios:</b></p>
+<ul>
+<li><b>Monousuario:</b> Solo un usuario puede usar el sistema a la vez. Ejemplo: Windows 10, macOS.</li>
+<li><b>Multiusuario:</b> Múltiples usuarios acceden simultáneamente. Ejemplo: Linux Server, Unix.</li>
+</ul>
+<p><b>Clasificación por Número de Tareas:</b></p>
+<ul>
+<li><b>Monotarea:</b> Un programa se ejecuta a la vez. Ejemplo: DOS.</li>
+<li><b>Multitarea:</b> Múltiples programas se ejecutan simultáneamente (intercalados o en paralelo). Ejemplo: Todos los SO modernos.</li>
+</ul>
+<p><b>Clasificación por Procesamiento:</b></p>
+<ul>
+<li><b>Uniprocesador:</b> Una sola CPU. Común en computadoras personales antiguas.</li>
+<li><b>Multiprocesador:</b> Múltiples CPUs. Servidores, computadoras gaming modernas.</li>
+</ul>
+<p><b>Clasificación por Tiempo de Respuesta:</b></p>
+<ul>
+<li><b>Batch:</b> Procesa trabajos en lotes sin interacción del usuario. Ej: sistemas de nómina antiguos.</li>
+<li><b>Interactivo:</b> Responde inmediatamente a entrada del usuario. Ej: Windows, Linux Desktop.</li>
+<li><b>Tiempo Real:</b> Garantiza respuesta dentro de plazos estrictos. Ej: Sistemas de control industrial, vehículos autónomos.</li>
+</ul>
+<p><b>Gestión de Recursos del Sistema Operativo:</b></p>
+<ul>
+<li><b>Gestión de Procesos:</b> Crear, ejecutar, pausar y terminar procesos. Asignación de CPU según prioridad.</li>
+<li><b>Gestión de Memoria:</b> Asignación de RAM a procesos, proteción de memoria, manejo de memoria virtual.</li>
+<li><b>Sistema de Archivos:</b> Organización jerárquica de carpetas y archivos en disco duro.</li>
+<li><b>Gestión de E/S:</b> Control de periféricos (impresoras, teclado, ratón, red, USB).</li>
+<li><b>Seguridad:</b> Autenticación de usuarios, control de acceso, encriptación de datos.</li>
+<li><b>Red y Comunicaciones:</b> Protocolo TCP/IP, manejo de conexiones, firewall.</li>
+</ul>
+<p><b>SO Más Utilizados Actualmente:</b></p>
+<ul>
+<li><b>Windows:</b> Desktops y servidores empresariales. Cuota de mercado: ~75% en desktops.</li>
+<li><b>macOS:</b> Computadoras Apple. Cuota: ~15% en desktops, muy popular en creativos.</li>
+<li><b>Linux:</b> Servidores, sistemas embebidos, data centers. Cuota en servidores: ~70%.</li>
+<li><b>iOS/Android:</b> Móviles y tablets. Combinados: ~99% del mercado mobile.</li>
+</ul>
+</div><div id="usos" class="card">
+<h2>📱 Usos y Ámbitos de los Sistemas Operativos</h2>
+<img src="/asset/02.jpg" class="imagen2">
+<p><b>Computadoras Personales (Desktop/Laptop):</b></p>
+<ul>
+<li>Windows: Trabajo de oficina, gaming, desarrollo.</li>
+<li>macOS: Diseño gráfico, edición de video, desarrollo.</li>
+<li>Linux: Desarrollo de software, servidores locales, usuarios técnicos.</li>
+</ul>
+<p><b>Dispositivos Móviles:</b></p>
+<ul>
+<li>iOS (Apple): Iphones, Ipads. Enfoque en seguridad y experiencia.</li>
+<li>Android (Google): Mayor cuota de mercado, diversos fabricantes.</li>
+<li>Características: Optimización para batería, touchscreen, ubicación.</li>
+</ul>
+<p><b>Servidores Empresariales:</b></p>
+<ul>
+<li>Linux Server: Apache, Nginx, bases de datos MySQL/PostgreSQL.</li>
+<li>Windows Server: Integración con Active Directory, Microsoft Exchange, SQL Server.</li>
+<li>Requieren uptime 24/7, redundancia, alta seguridad.</li>
+</ul>
+<p><b>Internet de las Cosas (IoT):</b></p>
+<ul>
+<li>Sistemas embebidos: Linux embebido, FreeRTOS.</li>
+<li>Aplicaciones: Termostatos inteligentes, sensores, smartwatches.</li>
+<li>Requisitos: Bajo consumo, tamaño reducido, funcionamiento autónomo.</li>
+</ul>
+<p><b>Sistemas de Tiempo Real:</b></p>
+<ul>
+<li>Control industrial: Robots, máquinas de manufactura.</li>
+<li>Automotriz: Sistemas ABS, control de motor.</li>
+<li>Aviación: Sistemas de navegación, piloto automático.</li>
+<li>Médico: Monitores cardíacos, ventiladores mecánicos.</li>
+</ul>
+<p><b>Centros de Datos:</b></p>
+<ul>
+<li>Virtualización: VMware, Hyper-V, KVM.</li>
+<li>Contenedorización: Docker, Kubernetes.</li>
+<li>Computación en la nube: AWS, Azure, Google Cloud.</li>
+</ul>
+<p><b>Otras Aplicaciones:</b> Televisores inteligentes, consolas de videojuegos, sistemas de entretenimiento automotriz, cámaras de seguridad, enrutadores de red.</p>
+<img src="https://cdn-icons-png.flaticon.com/512/2721/2721291.png">
+</div><div id="apps" class="card">
+<h2>🌐 Aplicaciones Actuales de los S.O.</h2>
+<img src="/asset/4.jpg" class="imagen2">
+<p><b>Gaming y Entretenimiento:</b></p>
+<ul>
+<li>Plataformas: PC (Windows/Linux), PlayStation, Xbox, Nintendo, móviles.</li>
+<li>Requisitos: Optimización de GPU, baja latencia, almacenamiento de alta velocidad (SSD).</li>
+<li>Ejemplos: Fortnite, Call of Duty, Elden Ring en múltiples plataformas.</li>
+</ul>
+<p><b>Computación en la Nube:</b></p>
+<ul>
+<li>Infraestructura: AWS (Elastic Compute Cloud), Microsoft Azure, Google Cloud Platform.</li>
+<li>Modelos: IaaS (máquinas virtuales), PaaS (plataformas), SaaS (software).</li>
+<li>Beneficios: Escalabilidad, pago por uso, mantenimiento reducido.</li>
+<li>Datos: 60% de aplicaciones empresariales corren en la nube actualmente.</li>
+</ul>
+<p><b>Inteligencia Artificial y Machine Learning:</b></p>
+<ul>
+<li>Frameworks: TensorFlow, PyTorch, scikit-learn.</li>
+<li>Sistemas: Reconocimiento facial, procesamiento de lenguaje natural (ChatGPT, Copilot).</li>
+<li>Requisitos: GPUs potentes, CPUs multicore, grandes cantidades de RAM.</li>
+</ul>
+<p><b>Ciencia e Investigación:</b></p>
+<ul>
+<li>Computación de Alto Rendimiento (HPC): Simulaciones climáticas, investigación nuclear, cálculos astrofísicos.</li>
+<li>Bioinformática: Análisis de genomas, modelado de proteínas.</li>
+<li>Plataformas: Supercomputadoras con Linux, clusters distribuidos.</li>
+</ul>
+<p><b>Industria y Manufactura:</b></p>
+<ul>
+<li>Automatización: Robots industriales, sistemas de control, IoT.</li>
+<li>Industria 4.0: Máquinas conectadas, análisis de datos en tiempo real.</li>
+<li>Sistemas: Tiempo real con determinismo garantizado.</li>
+</ul>
+<p><b>Finanzas y Criptografía:</b></p>
+<ul>
+<li>Trading algorítmico: Análisis de mercados en milisegundos.</li>
+<li>Blockchain: Bitcoin, Ethereum, criptomonedas.</li>
+<li>Requisitos: Seguridad extrema, rendimiento máximo, disponibilidad 24/7.</li>
+</ul>
+<p><b>Streaming y Redes Sociales:</b></p>
+<ul>
+<li>Plataformas: Netflix (Linux), YouTube (Google), TikTok.</li>
+<li>Infraestructura: Millones de servidores distribuidos globalmente.</li>
+<li>Desafies: Compresión de video, latencia ultra-baja, CDN global.</li>
+</ul>
+<img src="https://cdn-icons-png.flaticon.com/512/888/888879.png">
+</div><div id="windows" class="card">
+<h2>🪟 Evolución Histórica de Windows</h2>
+<p><b>Era 1.0 - 3.1 (1985-1994):</b></p>
+<ul>
+<li>Windows 1.0: Interfaz gráfica sobre MS-DOS. No era un SO completo, sino un entorno gráfico.</li>
+<li>Windows 3.0/3.1: Primera versión exitosa con 10 millones de copias vendidas. Introduced TrueType fonts y multimedia.</li>
+<li>Arquitectura: 16-bit, dependiente de DOS, 2-4 MB de RAM.</li>
+</ul>
+<p><b>Era 95/98 (1995-2000):</b></p>
+<ul>
+<li>Windows 95: Revolucionario con menú Inicio, barra de tareas, Plug & Play. Vendió 40 millones de copias en 4 años.</li>
+<li>Windows 98: Incorporó USB, FAT32, mayores velocidades. Más estable pero aún híbrido 16/32 bits.</li>
+<li>Windows Me (2000): Versión intermedia, muchos problemas técnicos, es considerada un fracaso.</li>
+</ul>
+<p><b>Era NT (2000-2007):</b></p>
+<ul>
+<li>Windows 2000: Primera versión completamente NT para consumidor. Muy estable, requería más recursos.</li>
+<li>Windows XP (2001): Unificó línea profesional y doméstica. Fue la versión más exitosa de Windows con 400+ millones de copias. Soporte hasta 2014.</li>
+<li>Características: Cifrado de archivos, hibernación, restauración del sistema, mejor multimedia.</li>
+</ul>
+<p><b>Era Post-XP (2007-2015):</b></p>
+<ul>
+<li>Windows Vista (2007): Enfoque en seguridad (UAC - User Account Control). Pero requería más recursos, problemas de drivers, poco popular.</li>
+<li>Windows 7 (2009): Rediseño de Vista, mucho más rápido. Segunda versión más exitosa después de XP. Soporte extendido hasta 2020.</li>
+<li>Windows 8 (2012): Interfaz "Modern" táctil, problemas de UX para usuarios de escritorio, fue impopular.</li>
+<li>Windows 8.1 (2013): Intento de corrección, permitía usar modo desktop.</li>
+</ul>
+<p><b>Era Moderna (2015-Presente):</b></p>
+<ul>
+<li>Windows 10 (2015): Retorno a escritorio clásico. Introducción de "Windows as a Service" (actualizaciones continuas).</li>
+<li>Características: Cortana (asistente virtual), Edge (nuevo navegador), soporte 32 y 64 bits.</li>
+<li>Versión universal para PC, tablets, y dispositivos IoT bajo el proyecto "OneCore".</li>
+<li>Windows 11 (2021): Interfaz modernizada con esquinas redondeadas, solo 64 bits, requiere TPM 2.0 y Secure Boot.</li>
+<li>Características: Integración profunda con Android, Microsoft Teams, mejoras de rendimiento.</li>
+</ul>
+<p><b>Tendencias Futuras:</b></p>
+<ul>
+<li>Enfoque en seguridad con requisitos más estrictos de hardware.</li>
+<li>Convergencia de dispositivos (PC, tablet, teléfono en uno).</li>
+<li>Computación en la nube más integrada (Microsoft 365).</li>
+<li>Sistemas operativos cada vez más ligeros en dispositivos móviles.</li>
+</ul>
+<img src="https://cdn-icons-png.flaticon.com/512/888/888882.png">
+</div><div id="final">
+🎉 Muchas gracias 🎉<br><br>
+•Cabrera Singh, Mª Lorena del Valle<br>
+•Romano, Reinaldo Carlos
+</div><footer>@ReiNArhiN todos los derechos reservados</footer><script>
+function toggle(id){
+  let x=document.getElementById(id);
+  x.style.display = x.style.display === 'block' ? 'none' : 'block';
+  showFinal();
+}
+
+function showFinal(){
+  document.getElementById('final').style.display='block';
+  for(let i=0;i<20;i++){
+    let c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=Math.random()*100+'vw';
+    c.style.background='hsl('+Math.random()*360+',100%,50%)';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+}
+</script></body>
+</html>

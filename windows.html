@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia Microsoft Windows</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #02050f;
+  --panel: #0d1221;
+  --border: rgba(255,255,255,0.14);
+  --glass: rgba(255,255,255,0.06);
+  --text: #eff8ff;
+  --muted: #a5b4fc;
+  --accent: #60a5fa;
+  --accent-strong: #38bdf8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Exo 2', sans-serif;
+  background: radial-gradient(circle at top, rgba(16,41,74,0.92), transparent 40%), var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(80,100,200,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80,100,200,0.05) 1px, transparent 1px);
+  background-size:44px 44px;
+  pointer-events:none; z-index:0;
+}
+
+/* ── HEADER ── */
+header {
+  position:relative; z-index:1;
+  text-align:center;
+  padding: 3rem 1.5rem 1rem;
+}
+header h1 {
+  font-family:'Orbitron', sans-serif;
+  font-size: clamp(1.3rem, 3.8vw, 2.8rem);
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  background: linear-gradient(135deg, #d8b4fe 0%, #38bdf8 50%, #34d399 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+header p {
+  margin-top:.8rem;
+  font-size:.92rem;
+  color:#c7d2fe;
+  max-width:720px;
+  margin-left:auto; margin-right:auto;
+  line-height:1.6;
+}
+header .page-link {
+  display:inline-flex; align-items:center; justify-content:center;
+  margin-top:1rem;
+  padding:.72rem 1.2rem;
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:999px;
+  color:#c7d2fe;
+  background:rgba(255,255,255,0.04);
+  text-decoration:none;
+  transition: transform .2s, border-color .2s, background .2s;
+}
+header .page-link:hover {
+  transform:translateY(-2px);
+  background:rgba(56,189,248,0.12);
+  border-color:rgba(56,189,248,0.35);
+}
+
+/* ── TIMELINE ── */
+.timeline-wrap {
+  position:relative; z-index:1;
+  display:flex; align-items:center; justify-content:center;
+  padding: 1.8rem 1rem 1rem;
+  overflow-x:auto;
+}
+.timeline-wrap::-webkit-scrollbar { height:3px; }
+.timeline-wrap::-webkit-scrollbar-thumb { background:#1e293b; border-radius:2px; }
+.timeline-inner {
+  display:flex; align-items:center; gap:0;
+  min-width:max-content;
+}
+.tl-connector {
+  width:22px; height:2px;
+  background: linear-gradient(90deg, var(--left-c), var(--right-c));
+  opacity:.3; flex-shrink:0;
+}
+.decade-btn {
+  position:relative;
+  display:inline-flex; flex-direction:column; align-items:center; gap:4px;
+  padding:.7rem .95rem;
+  background: rgba(15,23,42,0.8);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  cursor:pointer;
+  transition: all .3s;
+  min-width:84px;
+  text-decoration:none; color:inherit;
+  backdrop-filter:blur(8px);
+}
+.decade-btn:hover { transform:translateY(-4px); border-color:var(--accent-strong); }
+.decade-btn .btn-label { font-family:'Orbitron',sans-serif; font-size:.62rem; font-weight:700; letter-spacing:.1em; color:#c7d2fe; }
+.decade-btn .btn-icon { font-size:1.2rem; }
+
+/* ── PANELS ── */
+.panel-wrap {
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto;
+  padding: 1rem 1.5rem 4rem;
+}
+.panel {
+  margin-bottom:1.8rem;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:22px;
+  background: rgba(255,255,255,0.02);
+  overflow:hidden;
+  scroll-margin-top: 80px;
+}
+.panel-head {
+  display:flex; flex-wrap:wrap; align-items:flex-start; gap:1rem;
+  padding:1.4rem 1.6rem;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.panel-head .tag {
+  font-family:'Orbitron',sans-serif;
+  font-size:2rem; font-weight:900; color:#38bdf8; line-height:1;
+  flex-shrink:0;
+}
+.panel-head .brief { flex:1; min-width:0; }
+.panel-head .brief h2 { font-family:'Orbitron',sans-serif; font-size:1.05rem; color:#f8fafc; margin-bottom:.4rem; }
+.panel-head .brief p { color:#c7d2fe; line-height:1.6; font-size:.93rem; }
+
+/* ── IMAGE GRID ── */
+.panel-body { padding:1.25rem 1.6rem 1.6rem; }
+.img-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.8rem;
+  margin-bottom:1.2rem;
+}
+.img-thumb {
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.10);
+  cursor:pointer;
+  aspect-ratio:16/9;
+  background:#0a1220;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.img-thumb:hover {
+  transform:scale(1.025);
+  box-shadow:0 8px 32px rgba(56,189,248,0.22);
+  border-color:rgba(56,189,248,0.5);
+}
+.img-thumb img {
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  transition:opacity .3s;
+}
+.img-thumb .img-overlay {
+  position:absolute; inset:0;
+  background:rgba(0,0,0,0);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .25s;
+}
+.img-thumb:hover .img-overlay { background:rgba(0,0,0,0.28); }
+.img-thumb .zoom-icon {
+  opacity:0; transition:opacity .25s;
+  font-size:2rem; color:#fff; filter:drop-shadow(0 2px 8px #000);
+}
+.img-thumb:hover .zoom-icon { opacity:1; }
+.img-thumb .img-caption {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:.4rem .7rem;
+  background:linear-gradient(0deg,rgba(0,0,0,0.72),transparent);
+  font-size:.72rem; color:#e0f2fe;
+  opacity:0; transition:opacity .25s;
+}
+.img-thumb:hover .img-caption { opacity:1; }
+.img-placeholder {
+  width:100%; height:100%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:.5rem; color:#4a5568; font-size:.8rem;
+}
+.img-placeholder span { font-size:2rem; }
+
+/* ── INFO GRID ── */
+.info-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.65rem;
+}
+.info-block {
+  padding:.9rem 1rem;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:12px;
+}
+.info-block .info-label {
+  font-size:.68rem; font-weight:700; letter-spacing:.08em;
+  color:#60a5fa; text-transform:uppercase; margin-bottom:.35rem;
+}
+.info-block .info-val {
+  color:#dbeafe; line-height:1.55; font-size:.88rem;
+}
+.info-block.full-width { grid-column:1/-1; }
+.info-block.highlight {
+  border-color:rgba(56,189,248,0.22);
+  background:rgba(56,189,248,0.05);
+}
+.info-block.highlight .info-label { color:#38bdf8; }
+.visual-tags {
+  display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.4rem;
+}
+.vtag {
+  padding:.2rem .55rem;
+  background:rgba(96,165,250,0.12);
+  border:1px solid rgba(96,165,250,0.2);
+  border-radius:6px;
+  font-size:.72rem; color:#93c5fd;
+}
+
+/* ── TABLE ── */
+.table-wrap { overflow-x:auto; margin-top:1.25rem; }
+table { width:100%; border-collapse:collapse; min-width:700px; }
+thead th {
+  text-align:left; padding:1rem;
+  background:rgba(56,189,248,0.12);
+  color:#e0f2fe;
+  font-family:'Orbitron',sans-serif; font-size:.78rem; letter-spacing:.06em;
+}
+tbody tr { border-bottom:1px solid rgba(255,255,255,0.08); }
+tbody td { padding:.9rem 1rem; color:#cbd5e1; vertical-align:top; font-size:.88rem; }
+tbody tr:nth-child(odd) { background:rgba(255,255,255,0.02); }
+
+/* ── MODAL ── */
+.modal-bg {
+  display:none;
+  position:fixed; inset:0; z-index:9999;
+  background:rgba(0,0,0,0.88);
+  backdrop-filter:blur(6px);
+  align-items:center; justify-content:center;
+  padding:1rem;
+}
+.modal-bg.open { display:flex; }
+.modal-box {
+  position:relative;
+  max-width:900px; width:100%;
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  animation: modalIn .25s ease;
+}
+@keyframes modalIn {
+  from { opacity:0; transform:scale(.93); }
+  to   { opacity:1; transform:scale(1); }
+}
+.modal-img {
+  width:100%; display:block;
+  max-height:75vh; object-fit:contain;
+  background:#1a1a2e;
+}
+.modal-caption {
+  padding:.8rem 1.2rem .8rem 1.2rem;
+  font-size:.9rem; color:#1e293b;
+  background:#fff;
+  line-height:1.4;
+}
+.modal-close {
+  position:absolute; top:.6rem; right:.6rem;
+  width:36px; height:36px;
+  background:#ffffff;
+  border:2px solid #000;
+  border-radius:50%;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem; color:#000; font-weight:900;
+  transition:background .2s, transform .2s;
+  line-height:1;
+  z-index:10;
+}
+.modal-close:hover { background:#e5e7eb; transform:scale(1.1); }
+
+/* ── FOOTER ── */
+footer {
+  padding:2rem 1.5rem 3rem;
+  text-align:center; color:#94a3b8; font-size:.9rem;
+  position:relative; z-index:1;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px) {
+  .info-grid { grid-template-columns:1fr; }
+  .info-block.full-width { grid-column:auto; }
+}
+@media (max-width:700px) {
+  header { padding-top:2rem; }
+  .panel-head { padding:1rem; }
+  .panel-body { padding:1rem; }
+  .panel-head .tag { font-size:1.4rem; }
+  .tl-connector { width:14px; }
+  .decade-btn { min-width:62px; padding:.55rem .65rem; }
+  .decade-btn .btn-icon { font-size:1rem; }
+  .img-grid { grid-template-columns:1fr; gap:.6rem; }
+  .info-grid { grid-template-columns:1fr; }
+  table { min-width:580px; font-size:.8rem; }
+  thead th { font-size:.7rem; padding:.7rem .6rem; }
+  tbody td { padding:.7rem .6rem; }
+  .modal-box { border-radius:10px; }
+}
+@media (max-width:420px) {
+  header h1 { font-size:1.1rem; }
+  .decade-btn { min-width:52px; padding:.5rem .5rem; }
+  .decade-btn .btn-label { font-size:.55rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ MODAL ═══════════════ -->
+<div class="modal-bg" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+    <img class="modal-img" id="modalImg" src="" alt="">
+    <div class="modal-caption" id="modalCaption"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header>
+  <h1>Microsoft Windows: de 3.1 a 11</h1>
+  <p>Comparativa histórica de los principales hitos de Microsoft Windows — arquitectura, interfaz visual, requisitos y los saltos tecnológicos que definieron cada era.</p>
+  <a class="page-link" href="index.html">← Volver a la línea de tiempo</a>
+</header>
+
+<!-- ═══════════════ TIMELINE ═══════════════ -->
+<div class="timeline-wrap">
+  <div class="timeline-inner">
+    <a class="decade-btn" href="#win31"      style="--left-c:#d8b4fe;--right-c:#38bdf8"><span class="btn-icon">3.1</span><span class="btn-label">1992</span></a>
+    <div class="tl-connector" style="--left-c:#d8b4fe;--right-c:#38bdf8"></div>
+    <a class="decade-btn" href="#win95"      style="--left-c:#38bdf8;--right-c:#0ea5e9"><span class="btn-icon">95</span><span class="btn-label">1995</span></a>
+    <div class="tl-connector" style="--left-c:#38bdf8;--right-c:#0ea5e9"></div>
+    <a class="decade-btn" href="#win98"      style="--left-c:#0ea5e9;--right-c:#16a34a"><span class="btn-icon">98</span><span class="btn-label">1998</span></a>
+    <div class="tl-connector" style="--left-c:#0ea5e9;--right-c:#f59e0b"></div>
+    <a class="decade-btn" href="#winme"      style="--left-c:#f59e0b;--right-c:#f97316"><span class="btn-icon">ME</span><span class="btn-label">2000</span></a>
+    <div class="tl-connector" style="--left-c:#f97316;--right-c:#16a34a"></div>
+    <a class="decade-btn" href="#win2000"    style="--left-c:#16a34a;--right-c:#22c55e"><span class="btn-icon">2000</span><span class="btn-label">2000</span></a>
+    <div class="tl-connector" style="--left-c:#16a34a;--right-c:#22c55e"></div>
+    <a class="decade-btn" href="#winxp"      style="--left-c:#22c55e;--right-c:#f97316"><span class="btn-icon">XP</span><span class="btn-label">2001</span></a>
+    <div class="tl-connector" style="--left-c:#22c55e;--right-c:#f97316"></div>
+    <a class="decade-btn" href="#winvista"   style="--left-c:#f97316;--right-c:#ef4444"><span class="btn-icon">Vista</span><span class="btn-label">2007</span></a>
+    <div class="tl-connector" style="--left-c:#f97316;--right-c:#ef4444"></div>
+    <a class="decade-btn" href="#win7"       style="--left-c:#ef4444;--right-c:#6366f1"><span class="btn-icon">7</span><span class="btn-label">2009</span></a>
+    <div class="tl-connector" style="--left-c:#ef4444;--right-c:#6366f1"></div>
+    <a class="decade-btn" href="#win8"       style="--left-c:#6366f1;--right-c:#0ea5e9"><span class="btn-icon">8</span><span class="btn-label">2012</span></a>
+    <div class="tl-connector" style="--left-c:#6366f1;--right-c:#0ea5e9"></div>
+    <a class="decade-btn" href="#win10"      style="--left-c:#0ea5e9;--right-c:#0f766e"><span class="btn-icon">10</span><span class="btn-label">2015</span></a>
+    <div class="tl-connector" style="--left-c:#0ea5e9;--right-c:#0f766e"></div>
+    <a class="decade-btn" href="#win11"      style="--left-c:#0f766e;--right-c:#38bdf8"><span class="btn-icon">11</span><span class="btn-label">2021</span></a>
+  </div>
+</div>
+
+<!-- ═══════════════ PANELS ═══════════════ -->
+<div class="panel-wrap">
+
+  <!-- ── Windows 3.1 ── -->
+  <div id="win31" class="panel">
+    <div class="panel-head">
+      <div class="tag">3.1</div>
+      <div class="brief">
+        <h2>Windows 3.1 — La GUI que democratizó el PC</h2>
+        <p>Lanzado en abril de 1992, Windows 3.1 consolidó la interfaz gráfica de Microsoft sobre MS-DOS y vendió más de 3 millones de copias en los primeros dos meses. Introdujo las fuentes TrueType, multimedia y un entorno estable de ventanas superpuestas.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windows31a.jpg" data-caption="Windows 3.1">
+          <img src="/asset/windows31a.jpg" alt="Windows 3.11 workspace" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🖥️</span>Windows 3.11<br>Administrador de Programas</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Escritorio — Administrador de Programas (1992)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windows31b.jpg" data-caption="Windows 3.1 — Interfaz completa con aplicaciones típicas de la época: Write, Paintbrush y Solitaire">
+          <img src="/asset/windows31b.jpg" alt="Windows 3.11 aplicaciones" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🎨</span>Windows 3.11<br>Aplicaciones típicas</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Write, Paintbrush y accesorios clásicos</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Abril 1992</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">CPU 286/386SX · 2 MB RAM · 10–15 MB disco · MS-DOS 3.1+</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">16 bits con modo mejorado 386 de 32 bits · Dependiente de DOS</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Fondo gris (#C0C0C0) · 16 a 256 colores · Iconos 32×32 px en mapa de bits</div>
+        </div>
+        <div class="info-block full-width highlight">
+          <div class="info-label">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            Primera experiencia gráfica estable sobre DOS para el gran público. El <strong>Administrador de Programas</strong> con grupos de iconos reemplazó la línea de comandos. Las ventanas usaban un estilo <em>skeuomórfico plano 2D</em>: bordes en relieve simulados con píxeles claros/oscuros, sin aceleración GPU. Se introdujeron las fuentes <strong>TrueType</strong> (desarrolladas con Apple), eliminando los mapas de bits por tipografías escalables. Soporte de multimedia (MCI), OLE 1.0 para incrustar objetos entre aplicaciones y por primera vez un escritorio visualmente operativo sin tocar el teclado.
+          </div>
+          <div class="visual-tags">
+            <span class="vtag">TrueType fonts</span>
+            <span class="vtag">Estilo 2D en relieve</span>
+            <span class="vtag">Paleta 256 colores</span>
+            <span class="vtag">OLE 1.0</span>
+            <span class="vtag">Multimedia MCI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows 95 ── -->
+  <div id="win95" class="panel">
+    <div class="panel-head">
+      <div class="tag">95</div>
+      <div class="brief">
+        <h2>Windows 95 — La revolución del menú Inicio</h2>
+        <p>Lanzado con una campaña histórica con el tema de The Rolling Stones, Windows 95 vendió más de 7 millones de copias en 5 semanas. Introdujo el <em>Menú Inicio</em>, la <em>barra de tareas</em>, Plug and Play y la API Win32 completa, cambiando para siempre cómo el mundo interactúa con una computadora.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windows95a.jpg" data-caption="Windows 95">
+          <img src="/asset/windows95a.jpg" alt="Windows 95 escritorio" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🖥️</span>Windows 95<br>Escritorio predeterminado</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Escritorio predeterminado con barra de tareas (1995)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windows95b.jpg" data-caption="Windows 95 — Menú Inicio desplegado, el mayor cambio visual de la historia de Windows hasta ese momento">
+          <img src="/asset/windows95b.jpg" alt="Windows 95 menú inicio" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>📁</span>Windows 95<br>Menú Inicio</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">El icónico Menú Inicio — debut en 1995</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Agosto 1995</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">386 DX · 4 MB RAM · 55–65 MB disco · CD-ROM recomendado</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">Híbrido 16/32 bits · Kernel mejorado con compatibilidad DOS · Win32 API</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Fondo teal (#008080) · Gris (#C0C0C0) en ventanas · Iconos 32×32 con profundidad 3D simulada</div>
+        </div>
+        <div class="info-block full-width highlight">
+          <div class="info-label">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            El salto visual más grande hasta entonces: el <strong>Menú Inicio</strong> y la <strong>barra de tareas</strong> reemplazaron al Administrador de Programas. Las ventanas adoptaron un estilo <em>"3D"</em> más pronunciado con botones Minimizar/Maximizar/Cerrar en la esquina superior derecha (el trío que persiste hasta hoy). Se introdujo el <strong>Explorador de Windows</strong> con vista de árbol de directorios. Los iconos ganaron mayor profundidad visual con degradados sutiles. <strong>Plug and Play</strong> permitió detectar hardware automáticamente. La API <strong>Win32</strong> unificó el modelo de programación, permitiendo aplicaciones de 32 bits plenas como Microsoft Office 95.
+          </div>
+          <div class="visual-tags">
+            <span class="vtag">Menú Inicio</span>
+            <span class="vtag">Barra de tareas</span>
+            <span class="vtag">Win32 API</span>
+            <span class="vtag">Plug and Play</span>
+            <span class="vtag">Explorer shell</span>
+            <span class="vtag">Botones Min/Max/Cerrar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows 98 ── -->
+  <div id="win98" class="panel">
+    <div class="panel-head">
+      <div class="tag">98</div>
+      <div class="brief">
+        <h2>Windows 98 — Windows se conecta a Internet</h2>
+        <p>Windows 98 refinó el escritorio para la era web, integró Internet Explorer en el shell del sistema y fue el primer Windows en soportar múltiples monitores, USB nativo y reproducción de DVD de forma oficial.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windows98a.jpg" data-caption="Windows 98">
+          <img src="/asset/windows98a.jpg" alt="Windows 98 escritorio" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🌐</span>Windows 98<br>Escritorio</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Escritorio con barra de inicio rápido (1998)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windows98b.jpg" data-caption="Windows 98 SE — Second Edition con Internet Explorer 5 integrado y el escritorio activo (Active Desktop)">
+          <img src="/asset/windows98b.jpg" alt="Windows 98 SE" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>📺</span>Windows 98 SE<br>Active Desktop</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Windows 98 SE con Internet Explorer 5 (1999)</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Junio 1998 · SE: Mayo 1999</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">486 DX2/66 · 16 MB RAM · 195 MB disco</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">Híbrido 16/32 bits basado en DOS · Kernel 98 mejorado · FAT32 nativo</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Idéntica a Win95 visualmente · Active Desktop añadía contenido web como fondo</div>
+        </div>
+        <div class="info-block full-width highlight">
+          <div class="info-label">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            Aunque visualmente muy similar a Windows 95, el salto real fue la <strong>integración profunda de Internet Explorer</strong> en el shell: el Explorador de Windows podía navegar páginas web y el <em>Active Desktop</em> permitía incrustar contenido HTML directamente en el fondo del escritorio. Se añadió la <strong>barra de inicio rápido</strong> junto al botón Inicio. Primer Windows con soporte nativo de <strong>USB</strong>, <strong>múltiples monitores</strong> y <strong>DVD</strong>. Las carpetas podían mostrar vistas personalizadas con HTML. La paleta de 24 bits (TrueColor) se volvió estándar, permitiendo iconos y fondos de mayor calidad visual.
+          </div>
+          <div class="visual-tags">
+            <span class="vtag">Active Desktop</span>
+            <span class="vtag">USB nativo</span>
+            <span class="vtag">Multi-monitor</span>
+            <span class="vtag">FAT32</span>
+            <span class="vtag">TrueColor 24-bit</span>
+            <span class="vtag">Inicio rápido</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows ME ── -->
+  <div id="winme" class="panel">
+    <div class="panel-head">
+      <div class="tag" style="color:#f59e0b">ME</div>
+      <div class="brief">
+        <h2>Windows Millennium Edition — El último heredero del DOS</h2>
+        <p>Lanzado en septiembre del año 2000, el mismo año que Windows 2000, Windows ME fue el último sistema de la línea <strong>Windows 9x</strong> — la rama doméstica basada en DOS. Aunque compartían año de lanzamiento, ME y Windows 2000 eran productos completamente distintos, con kernels diferentes, públicos distintos y destinos opuestos.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <!-- Caja de diferencia ME vs 2000 -->
+      <div style="margin-bottom:1rem; padding:1rem 1.2rem; background:rgba(245,158,11,0.07); border:1px solid rgba(245,158,11,0.25); border-radius:14px;">
+        <div style="font-size:.72rem; font-weight:700; letter-spacing:.08em; color:#f59e0b; text-transform:uppercase; margin-bottom:.5rem;">⚠️ ¿ME y Windows 2000 eran lo mismo?</div>
+        <div style="color:#fde68a; font-size:.9rem; line-height:1.6;">
+          <strong>No.</strong> Convivieron en el mismo año pero eran sistemas completamente distintos:<br>
+          • <strong>Windows ME</strong> → kernel híbrido DOS/9x · para usuarios domésticos · heredero de Win98<br>
+          • <strong>Windows 2000</strong> → kernel NT puro · para empresas y profesionales · heredero de NT4<br>
+          La confusión era común porque Microsoft los lanzó con pocos meses de diferencia. Windows XP (2001) fue el primero en unificar ambas ramas bajo un único kernel NT para todos los públicos.
+        </div>
+      </div>
+
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windowsmilenniuma.png" data-caption="Windows Millennium Edition">
+          <img src="/asset/windowsmilenniuma.png" alt="Windows ME escritorio" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🌅</span>Windows ME<br>Escritorio</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Escritorio de Windows ME (2000)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windowsmilenniumb.jpg" data-caption="Windows ME — Movie Maker y Media Player 7, las novedades multimedia estrella de esta versión, que intentaban modernizar la experiencia doméstica">
+          <img src="/asset/windowsmilenniumb.jpg" alt="Windows ME aplicaciones" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🎬</span>Windows ME<br>Movie Maker</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Movie Maker y Media Player 7 — novedades clave</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Septiembre 2000 · Mismo año que Windows 2000 (febrero)</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">Pentium 150 MHz · 32 MB RAM · 480–645 MB disco</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">Híbrido 16/32 bits · Línea Windows 9x · Eliminó el modo real de DOS · NO era kernel NT</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Idéntica a Win98 visualmente · Iconos de mayor calidad · Interfaz heredada del diseño 9x · Sin cambios de lenguaje de diseño</div>
+        </div>
+        <div class="info-block full-width highlight" style="border-color:rgba(245,158,11,0.25); background:rgba(245,158,11,0.04);">
+          <div class="info-label" style="color:#f59e0b;">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            ME fue el intento de modernizar la rama 9x antes de que XP la reemplazara definitivamente. Visualmente era casi idéntico a Windows 98: mismo gris, misma barra de tareas, mismos iconos — aunque con mayor calidad en los fondos de pantalla predeterminados. El verdadero cambio fue funcional: <strong>eliminó el modo real de DOS</strong> (aunque la base interna del kernel seguía siendo DOS), introdujo <strong>Windows Movie Maker</strong> (el primer editor de video básico integrado en Windows), <strong>Windows Media Player 7</strong> con nueva interfaz, soporte de <strong>USB mejorado</strong> y restauración del sistema nativa (<em>System Restore</em>) por primera vez. Sin embargo, fue el Windows más criticado de la historia por su inestabilidad: muchos PCs que corrían bien Win98 fallaban con ME por incompatibilidades de drivers. Fue discontinuado en 2006 y considerado el último eslabón de la era DOS — una era que terminó definitivamente con la llegada de Windows XP en 2001.
+          </div>
+          <div class="visual-tags">
+            <span class="vtag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;background:rgba(245,158,11,0.1);">Última línea 9x/DOS</span>
+            <span class="vtag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;background:rgba(245,158,11,0.1);">Movie Maker</span>
+            <span class="vtag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;background:rgba(245,158,11,0.1);">System Restore</span>
+            <span class="vtag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;background:rgba(245,158,11,0.1);">Media Player 7</span>
+            <span class="vtag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;background:rgba(245,158,11,0.1);">Sin modo real DOS</span>
+            <span class="vtag" style="border-color:rgba(245,158,11,0.3);color:#fcd34d;background:rgba(245,158,11,0.1);">≠ Windows 2000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows 2000 ── -->
+  <div id="win2000" class="panel">
+    <div class="panel-head">
+      <div class="tag">2000</div>
+      <div class="brief">
+        <h2>Windows 2000 — El kernel NT llega al escritorio profesional</h2>
+        <p>Windows 2000 trasladó la robustez del kernel NT4 al escritorio profesional, con soporte completo para NTFS, Active Directory, seguridad avanzada y gestión de redes. <strong>No era para uso doméstico</strong> — ese rol lo cubría Windows ME ese mismo año. Fue el puente directo hacia Windows XP.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windows2000a.jpg" data-caption="Windows 2000 Professional">
+          <img src="/asset/windows2000a.jpg" alt="Windows 2000 Professional" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🏢</span>Windows 2000<br>Professional</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Windows 2000 Professional (2000)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windows2000b.jpg" data-caption="Windows 2000 — Panel de control y administración de usuarios, reflejando el enfoque empresarial del sistema">
+          <img src="/asset/windows2000b.jpg" alt="Windows 2000 panel de control" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>⚙️</span>Windows 2000<br>Panel de control</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Administración y Panel de Control (2000)</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Febrero 2000</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">Pentium 133 MHz · 64 MB RAM · 2 GB disco</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">NT 5.0 · 32 bits (versiones 64-bit en edición Server) · Kernel NT puro</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Heredada de Win98 · Iconos refinados · Mayor calidad en fondos · Fondo predeterminado azul oscuro</div>
+        </div>
+        <div class="info-block full-width highlight">
+          <div class="info-label">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            El fin definitivo del legado MS-DOS en el escritorio. Windows 2000 fue el primer Windows basado 100% en el kernel <strong>NT</strong> para uso general profesional, con NTFS, seguridad por usuarios y grupos, y soporte de Active Directory. Visualmente adoptó una interfaz más pulida que Win98/95: iconos de mayor resolución, ventanas ligeramente más refinadas y un escritorio más profesional. Introdujo el <strong>MMC (Microsoft Management Console)</strong> para administración centralizada. La estabilidad mejoró radicalmente — el temido "pantallón azul" se volvió mucho menos frecuente. Sentó las bases directas para Windows XP.
+          </div>
+          <div class="visual-tags">
+            <span class="vtag">Kernel NT puro</span>
+            <span class="vtag">NTFS</span>
+            <span class="vtag">Active Directory</span>
+            <span class="vtag">Sin DOS</span>
+            <span class="vtag">MMC</span>
+            <span class="vtag">Seguridad por usuarios</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows XP ── -->
+  <div id="winxp" class="panel">
+    <div class="panel-head">
+      <div class="tag">XP</div>
+      <div class="brief">
+        <h2>Windows XP — El mayor salto visual de su era</h2>
+        <p>Con más de 400 millones de copias vendidas y soporte extendido hasta 2014, Windows XP fue el sistema operativo más popular de la historia por años. Unió la base NT estable con una interfaz radicalmente renovada y colorida que definió una generación entera.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windowsxpa.jpg" data-caption="Windows XP">
+          <img src="/asset/windowsxpa.jpg" alt="Windows XP escritorio" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🌿</span>Windows XP<br>Escritorio Bliss</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Tema Luna con el icónico fondo "Bliss" (2001)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windowsxpb.jpg" data-caption="Windows XP SP3 — Menú Inicio rediseñado con lista de aplicaciones recientes y acceso rápido a carpetas del usuario">
+          <img src="/asset/windowsxpb.jpg" alt="Windows XP SP3" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🚀</span>Windows XP SP3<br>Menú Inicio</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Nuevo Menú Inicio con dos columnas (SP3)</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Octubre 2001 · SP3: Abril 2008</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">233 MHz · 64 MB RAM · 1.5 GB disco · Tarjeta de video SVGA</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">NT 5.1 · 32 bits y 64 bits (x64 Edition) · Kernel NT unificado</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Azul luna (#1C5FA8) · Verde brillante · Botón Inicio verde · Iconos 48×48 px con sombras · ClearType</div>
+        </div>
+        <div class="info-block full-width highlight">
+          <div class="info-label">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            El mayor rediseño visual hasta ese momento. El tema <strong>Luna</strong> reemplazó el gris de Windows 95/98/2000 con colores vivos: barra de tareas en azul brillante, botón Inicio verde con logo y texto, bordes de ventana redondeados y un fondo de pantalla predeterminado ("Bliss" — la fotografía más reproducida de la historia). Los iconos saltaron a <strong>48×48 px</strong> con suavizado y sombras suaves. Se introdujo <strong>ClearType</strong> para mejor renderizado de texto en LCD. El Menú Inicio fue rediseñado con dos columnas. Se unificó el sistema de consumo y empresarial sobre un único kernel NT, eliminando la línea Windows 9x para siempre. Tres temas de color: Luna Azul, Olivo y Plata.
+          </div>
+          <div class="visual-tags">
+            <span class="vtag">Tema Luna</span>
+            <span class="vtag">Fondo Bliss</span>
+            <span class="vtag">ClearType</span>
+            <span class="vtag">Iconos 48×48</span>
+            <span class="vtag">NT unificado</span>
+            <span class="vtag">DirectX 8/9</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows Vista ── -->
+  <div id="winvista" class="panel">
+    <div class="panel-head">
+      <div class="tag">Vista</div>
+      <div class="brief">
+        <h2>Windows Vista — Aero Glass y el futuro visual</h2>
+        <p>Tras 5 años de desarrollo (el más largo entre versiones de Windows), Vista introdujo la interfaz <em>Aero Glass</em> con transparencias reales, el UAC de seguridad, la nueva pila de controladores y DirectX 10. Revolucionario en diseño pero criticado por su rendimiento inicial.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windowsvistaa.jpg" data-caption="Windows Vista">
+          <img src="/asset/windowsvistaa.jpg" alt="Windows Vista Aero" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>💎</span>Windows Vista<br>Aero Glass</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Aero Glass con barra lateral de gadgets (2007)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windowsvistab.jpg" data-caption="Windows Vista Flip 3D — El conmutador tridimensional de ventanas, una de las características visuales más recordadas de Vista">
+          <img src="/asset/windowsvistab.jpg" alt="Windows Vista Flip 3D" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🔄</span>Windows Vista<br>Flip 3D</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Flip 3D — conmutador de ventanas en cascada</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Enero 2007 (empresas: Noviembre 2006)</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">800 MHz · 512 MB RAM · 15 GB disco · GPU con DirectX 9 + 128 MB VRAM para Aero</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">NT 6.0 · 32 y 64 bits · WDDM 1.0 · Nuevo modelo de drivers</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Aero Glass: transparencias con blur real · Iconos vectoriales hasta 256×256 px · Tipografía Segoe UI</div>
+        </div>
+        <div class="info-block full-width highlight">
+          <div class="info-label">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            El mayor salto visual desde XP. <strong>Aero Glass</strong> introdujo <em>transparencias reales</em> en los bordes de ventana con efecto blur del contenido detrás — la primera vez que Windows usó la GPU para renderizar la interfaz del sistema operativo completa (vía el nuevo <strong>WDDM — Windows Display Driver Model</strong>). Los iconos escalaban hasta <strong>256×256 px</strong> con suavizado total. Se introdujo la tipografía <strong>Segoe UI</strong> que perduraría hasta Windows 11. El <em>Flip 3D</em> mostraba ventanas en cascada tridimensional. La barra de tareas mostraba <em>miniaturas en vivo</em> al pasar el mouse. El UAC (Control de Cuentas de Usuario) y la firma digital de drivers reforzaron la seguridad. DirectX 10 fue exclusivo de Vista.
+          </div>
+          <div class="visual-tags">
+            <span class="vtag">Aero Glass</span>
+            <span class="vtag">WDDM</span>
+            <span class="vtag">Segoe UI</span>
+            <span class="vtag">Iconos 256×256</span>
+            <span class="vtag">Flip 3D</span>
+            <span class="vtag">UAC</span>
+            <span class="vtag">DirectX 10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows 7 ── -->
+  <div id="win7" class="panel">
+    <div class="panel-head">
+      <div class="tag">7</div>
+      <div class="brief">
+        <h2>Windows 7 — Aero perfeccionado</h2>
+        <p>Windows 7 pulió cada aspecto de Vista, redujo el consumo de recursos, refinó la interfaz Aero y se convirtió en la versión más aclamada de Windows en la era NT moderna, manteniendo su popularidad hasta bien entrada la era de Windows 10.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windows7a.jpg" data-caption="Windows 7">
+          <img src="/asset/windows7a.jpg" alt="Windows 7 escritorio" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🪟</span>Windows 7<br>Escritorio</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Escritorio con nueva barra de tareas (2009)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windows7b.jpg" data-caption="Windows 7 Aero Snap — organización automática de ventanas arrastrando al borde de la pantalla, una innovación que cambió la forma de trabajar con múltiples ventanas">
+          <img src="/asset/windows7b.jpg" alt="Windows 7 Aero Snap" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>📐</span>Windows 7<br>Aero Snap</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Aero Snap — división de pantalla inteligente</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Octubre 2009</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">1 GHz · 1 GB RAM (32-bit) / 2 GB (64-bit) · 16/20 GB disco</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">NT 6.1 · 32 y 64 bits · WDDM 1.1 · DirectX 11</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Aero refinado · Barra de tareas translúcida elegante · Sin sidebar · Themes con colores de acento</div>
+        </div>
+        <div class="info-block full-width highlight">
+          <div class="info-label">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            Refinamiento total de Vista sin romper nada. La <strong>barra de tareas</strong> fue completamente rediseñada: iconos más grandes sin etiqueta de texto, miniaturas en vivo agrupadas y soporte de <em>Jump Lists</em> (menú contextual con acciones frecuentes). Se eliminó la barra lateral, los gadgets pasaron al escritorio libremente. <strong>Aero Peek</strong> transparentaba todas las ventanas para ver el escritorio. <strong>Aero Snap</strong> organizaba ventanas arrastrando al borde. <strong>Aero Shake</strong> minimizaba todas las ventanas agitando una. Soporte mejorado de pantallas táctiles multi-touch. DirectX 11 llegó con tesselation y shaders de cómputo. Fue el Windows más querido por su equilibrio visual-rendimiento.
+          </div>
+          <div class="visual-tags">
+            <span class="vtag">Aero Peek</span>
+            <span class="vtag">Aero Snap</span>
+            <span class="vtag">Jump Lists</span>
+            <span class="vtag">Multi-touch</span>
+            <span class="vtag">DirectX 11</span>
+            <span class="vtag">Taskbar rediseñada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows 8 ── -->
+  <div id="win8" class="panel">
+    <div class="panel-head">
+      <div class="tag">8</div>
+      <div class="brief">
+        <h2>Windows 8 — El gran experimento táctil</h2>
+        <p>Windows 8 fue la apuesta más radical de Microsoft: eliminar el menú Inicio clásico y reemplazarlo con una pantalla de tiles para dispositivos táctiles. Introducía soporte ARM, UEFI nativo y un nuevo paradigma de apps modernas — pero dividió a los usuarios.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windows8a.jpg" data-caption="Windows 8.1">
+          <img src="/asset/windows8a.jpg" alt="Windows 8.1 Start Screen" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>⬛</span>Windows 8.1<br>Pantalla Inicio Metro</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Pantalla Metro/Modern UI con tiles (2013)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windows8b.jpg" data-caption="Windows 8.1 — Escritorio clásico sin barra Inicio, con botón de inicio reintroducido en 8.1 y barra Charms lateral">
+          <img src="/asset/windows8b.jpg" alt="Windows 8.1 escritorio" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🖥️</span>Windows 8.1<br>Escritorio clásico</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Escritorio clásico con Charms Bar lateral</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Octubre 2012 · Windows 8.1: Octubre 2013</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">1 GHz · 1 GB RAM (32-bit) / 2 GB (64-bit) · 16/20 GB disco</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">NT 6.2/6.3 · 32 y 64 bits · Windows RT para ARM · UEFI/Secure Boot · WinRT API</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Diseño Flat total: colores sólidos y saturados · Sin transparencias · Tipografía Segoe WP · Sin Aero</div>
+        </div>
+        <div class="info-block full-width highlight">
+          <div class="info-label">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            La ruptura más radical desde Windows 95. Se eliminaron las transparencias Aero y se adoptó el <strong>lenguaje de diseño Metro</strong> (renombrado "Modern UI"): colores planos y sólidos, sin sombras, sin gradientes — el primer Windows con diseño completamente <em>flat</em>. La pantalla de inicio con <em>tiles animados</em> reemplazó al menú Inicio. La <em>Charms Bar</em> aparecía deslizando desde la derecha. Las apps modernas corrían en pantalla completa. Se introdujo <strong>Windows RT</strong> para procesadores ARM. La API <strong>WinRT</strong> permitía apps tanto en tablets como en PCs. El escritorio clásico coexistía con la interfaz táctil, creando confusión. Windows 8.1 reintrodujo el botón Inicio (aunque llevaba a la pantalla táctil).
+          </div>
+          <div class="visual-tags">
+            <span class="vtag">Metro / Modern UI</span>
+            <span class="vtag">Diseño Flat</span>
+            <span class="vtag">ARM (Windows RT)</span>
+            <span class="vtag">UEFI/Secure Boot</span>
+            <span class="vtag">WinRT API</span>
+            <span class="vtag">Charms Bar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows 10 ── -->
+  <div id="win10" class="panel">
+    <div class="panel-head">
+      <div class="tag">10</div>
+      <div class="brief">
+        <h2>Windows 10 — Windows como servicio</h2>
+        <p>Windows 10 reconcilió el escritorio clásico con las ideas modernas de Windows 8 y adoptó el modelo de <em>Windows como Servicio</em> con actualizaciones continuas. Se volvió el sistema operativo más usado de la historia, declarado inicialmente "el último Windows".</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windows10a.png" data-caption="Windows 10">
+          <img src="/asset/windows10a.png" alt="Windows 10 escritorio" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🪟</span>Windows 10<br>Escritorio</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Escritorio con menú Inicio híbrido (2015)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windows10b.png" data-caption="Windows 10 — Centro de actividades (Action Center) y modo oscuro del sistema, introducido en actualizaciones de 2019">
+          <img src="/asset/windows10b.png" alt="Windows 10 Action Center" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🔔</span>Windows 10<br>Action Center</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Centro de actividades y notificaciones</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Julio 2015 · Fin de soporte: Octubre 2025</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">1 GHz · 1 GB RAM (32-bit) / 2 GB (64-bit) · 16/20 GB disco</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">NT 10.0 · 32 y 64 bits · OneCore unificado · WSL (Linux subsystem)</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Fluent Design: Acrílico, profundidad, luz, revelado · Modo oscuro nativo · Color de acento personalizable</div>
+        </div>
+        <div class="info-block full-width highlight">
+          <div class="info-label">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            Vuelta al menú Inicio pero evolucionado: lista de apps + tiles opcionales. Se introdujo el <strong>Fluent Design System</strong> de forma progresiva: <em>material Acrílico</em> (translúcidez difuminada), efectos de revelado (iluminación al pasar el ratón), profundidad y sombras suaves. Modo oscuro nativo para el sistema y apps. El Centro de Actividades lateral reemplazó los Charms. <strong>DirectX 12</strong> optimizó gráficos multi-núcleo. El núcleo <strong>OneCore</strong> unificó Windows en PC, Xbox, IoT y HoloLens. El <strong>WSL</strong> (Subsistema de Windows para Linux) permitió correr Linux nativo. Cortana integrada en la barra de búsqueda. <strong>Windows Hello</strong> introdujo autenticación biométrica. Trece actualizaciones principales en 6 años.
+          </div>
+          <div class="visual-tags">
+            <span class="vtag">Fluent Design</span>
+            <span class="vtag">Material Acrílico</span>
+            <span class="vtag">Modo oscuro</span>
+            <span class="vtag">DirectX 12</span>
+            <span class="vtag">OneCore</span>
+            <span class="vtag">WSL</span>
+            <span class="vtag">Windows Hello</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows 11 ── -->
+  <div id="win11" class="panel">
+    <div class="panel-head">
+      <div class="tag">11</div>
+      <div class="brief">
+        <h2>Windows 11 — El rediseño más ambicioso desde Vista</h2>
+        <p>Lanzado en octubre de 2021 y superando el 51% del mercado de escritorio en 2025, Windows 11 es el rediseño visual más profundo desde la era Aero. Centra el menú Inicio, redondea todo el sistema, refuerza la seguridad con TPM 2.0 e integra IA con Copilot.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="img-grid">
+        <div class="img-thumb" data-src="/asset/windows11.jpeg" data-caption="Windows 11">
+          <img src="/asset/windows11.jpeg" alt="Windows 11 escritorio" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>✨</span>Windows 11<br>Escritorio</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Escritorio con menú Inicio centrado (2021)</div>
+        </div>
+        <div class="img-thumb" data-src="/asset/windows11b.jpg" data-caption="Windows 11 — Nuevo menú Inicio centrado sin tiles, apps ancladas y sección de recomendaciones impulsada por IA">
+          <img src="/asset/windows11b.jpg" alt="Windows 11 menú inicio" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><span>🪟</span>Windows 11<br>Menú Inicio centrado</div>'">
+          <div class="img-overlay"><span class="zoom-icon">🔍</span></div>
+          <div class="img-caption">Menú Inicio centrado sin tiles (2021)</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-label">Año de lanzamiento</div>
+          <div class="info-val">Octubre 2021 · Cuota de mercado: 51.8% (julio 2025)</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Requisitos mínimos</div>
+          <div class="info-val">1 GHz dual-core 64-bit · 4 GB RAM · 64 GB disco · TPM 2.0 · Secure Boot · DirectX 12</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Arquitectura</div>
+          <div class="info-val">NT 10.0 (build 22000+) · Solo 64 bits · TPM 2.0 obligatorio · DirectStorage · WSL 2 mejorado</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Paleta visual</div>
+          <div class="info-val">Mica + Acrílico · Bordes redondeados globales · Iconos rediseñados planos-profundos · Segoe UI Variable · Menú centrado</div>
+        </div>
+        <div class="info-block full-width highlight">
+          <div class="info-label">⚡ Salto arquitectónico y visual</div>
+          <div class="info-val">
+            El rediseño más coherente y ambicioso desde Windows Vista. <strong>Bordes redondeados</strong> en absolutamente todo: ventanas, menús, botones, notificaciones. Dos nuevos materiales de UI: <em>Mica</em> (translúcido con tinte del fondo del escritorio) y <em>Acrílico</em> (blur del contenido detrás). Los iconos fueron completamente rediseñados con una nueva estética plana-expresiva y paleta de colores actualizada. La barra de tareas se centró (polémica pero coherente con la tendencia moderna). La tipografía <strong>Segoe UI Variable</strong> adapta su grosor automáticamente al tamaño. El menú Inicio eliminó los tiles (diseño limpio). <strong>DirectStorage</strong> redujo tiempos de carga en juegos. <strong>Auto HDR</strong> mejoró el color en pantallas compatibles. <strong>TPM 2.0 obligatorio</strong> elevó el estándar de seguridad. Integración de <strong>Copilot</strong> (IA) desde 2023. Solo 64 bits — adiós definitivo al legado de 32 bits.
+          </div>
+          <div class="visual-tags">
+            <span class="vtag">Material Mica</span>
+            <span class="vtag">Bordes redondeados</span>
+            <span class="vtag">Segoe UI Variable</span>
+            <span class="vtag">TPM 2.0</span>
+            <span class="vtag">DirectStorage</span>
+            <span class="vtag">Auto HDR</span>
+            <span class="vtag">Copilot IA</span>
+            <span class="vtag">Solo 64-bit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TABLA RESUMEN ── -->
+  <div class="panel">
+    <div class="panel-head">
+      <div class="tag" style="font-size:1.4rem">≡</div>
+      <div class="brief">
+        <h2>Resumen comparativo completo</h2>
+        <p>Tabla con los hitos clave de cada versión: año, requisitos, arquitectura, lenguaje visual y el salto que definió cada generación.</p>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Versión</th>
+              <th>Año</th>
+              <th>RAM mínima</th>
+              <th>Arquitectura</th>
+              <th>Lenguaje visual</th>
+              <th>Salto clave</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Windows 3.1</strong></td>
+              <td>1992</td>
+              <td>2 MB</td>
+              <td>16-bit / DOS</td>
+              <td>Gris plano, relieve 2D, 256 colores</td>
+              <td>Primera GUI estable con TrueType y multimedia</td>
+            </tr>
+            <tr>
+              <td><strong>Windows 95</strong></td>
+              <td>1995</td>
+              <td>4 MB</td>
+              <td>Híbrido 16/32-bit</td>
+              <td>Gris 3D, Inicio verde, fondo teal</td>
+              <td>Menú Inicio, Win32 API, Plug and Play</td>
+            </tr>
+            <tr>
+              <td><strong>Windows 98</strong></td>
+              <td>1998</td>
+              <td>16 MB</td>
+              <td>Híbrido 16/32-bit</td>
+              <td>Igual a 95 + Active Desktop web</td>
+              <td>USB nativo, multi-monitor, web integrada</td>
+            </tr>
+            <tr style="background:rgba(245,158,11,0.05)">
+              <td><strong>Windows ME</strong> <span style="font-size:.75rem;color:#f59e0b">(doméstico)</span></td>
+              <td>2000</td>
+              <td>32 MB</td>
+              <td>9x híbrido DOS — <strong>NO es NT</strong></td>
+              <td>Idéntico a Win98 · sin cambios visuales notables</td>
+              <td>Última línea 9x · Movie Maker · System Restore</td>
+            </tr>
+            <tr>
+              <td><strong>Windows 2000</strong> <span style="font-size:.75rem;color:#38bdf8">(empresarial)</span></td>
+              <td>2000</td>
+              <td>64 MB</td>
+              <td>NT 5.0 · 32-bit — <strong>NO es 9x</strong></td>
+              <td>Refinado, profesional, iconos de mayor resolución</td>
+              <td>Kernel NT puro, NTFS, Active Directory</td>
+            </tr>
+            <tr>
+              <td><strong>Windows XP</strong></td>
+              <td>2001</td>
+              <td>64 MB</td>
+              <td>NT 5.1 · 32/64-bit</td>
+              <td>Tema Luna: azul brillante, iconos 48px, ClearType</td>
+              <td>NT unificado para consumidor, diseño colorido</td>
+            </tr>
+            <tr>
+              <td><strong>Windows Vista</strong></td>
+              <td>2007</td>
+              <td>512 MB</td>
+              <td>NT 6.0 · 32/64-bit</td>
+              <td>Aero Glass: transparencias, iconos 256px, Segoe UI</td>
+              <td>GPU para UI (WDDM), UAC, DirectX 10</td>
+            </tr>
+            <tr>
+              <td><strong>Windows 7</strong></td>
+              <td>2009</td>
+              <td>1/2 GB</td>
+              <td>NT 6.1 · 32/64-bit</td>
+              <td>Aero refinado, taskbar con iconos sin texto</td>
+              <td>Aero Snap/Peek, Jump Lists, DirectX 11</td>
+            </tr>
+            <tr>
+              <td><strong>Windows 8</strong></td>
+              <td>2012</td>
+              <td>1/2 GB</td>
+              <td>NT 6.2 · 32/64/ARM</td>
+              <td>Metro Flat: tiles, colores sólidos, sin Aero</td>
+              <td>Diseño flat, ARM/UEFI, WinRT API</td>
+            </tr>
+            <tr>
+              <td><strong>Windows 10</strong></td>
+              <td>2015</td>
+              <td>1/2 GB</td>
+              <td>NT 10.0 · 32/64-bit</td>
+              <td>Fluent Design: acrílico, modo oscuro, revelado</td>
+              <td>WaaS, OneCore, DirectX 12, WSL</td>
+            </tr>
+            <tr>
+              <td><strong>Windows 11</strong></td>
+              <td>2021</td>
+              <td>4 GB</td>
+              <td>NT 10.0 · Solo 64-bit</td>
+              <td>Mica/Acrílico, bordes redondeados, Segoe Variable</td>
+              <td>TPM 2.0, DirectStorage, Copilot IA</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /panel-wrap -->
+
+<footer>
+  De la interfaz gris de DOS a los bordes redondeados de Windows 11 — 40 años de evolución visual y arquitectónica de Microsoft Windows.
+</footer>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+// ── Lightbox / Modal ──
+const modal    = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const modalCap = document.getElementById('modalCaption');
+const modalClose = document.getElementById('modalClose');
+
+function openModal(src, caption) {
+  modalImg.src = src;
+  modalCap.textContent = caption;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  modalImg.src = '';
+}
+
+// Click on thumbnails
+document.querySelectorAll('.img-thumb').forEach(thumb => {
+  thumb.addEventListener('click', () => {
+    const src     = thumb.dataset.src;
+    const caption = thumb.dataset.caption;
+    if (src) openModal(src, caption);
+  });
+  // Keyboard accessibility
+  thumb.setAttribute('tabindex', '0');
+  thumb.setAttribute('role', 'button');
+  thumb.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      thumb.click();
+    }
+  });
+});
+
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── Smooth scroll for timeline buttons ──
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
