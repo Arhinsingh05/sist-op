@@ -17,11 +17,6 @@ header{
   font-weight:bold;
   text-shadow:0 0 20px #00e5ff;
 }
-.container{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-}
 button{
   margin:10px;
   padding:15px 20px;
@@ -37,31 +32,51 @@ button:hover{
   transform:scale(1.1);
   box-shadow:0 0 25px #00e5ff;
 }
+img{
+  width:180px;
+  margin:10px;
+  border-radius:10px;
+  max-width:100%;
+  height:auto;
+}
+.imagen {
+  width: 100%;
+  max-width:400px;
+}
+.imagen2 {
+  width: 100%;
+  max-width:800px;
+}
+.container{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.85rem;
+  padding:.9rem;
+}
 .card{
   display:none;
-  margin:20px;
+  margin:20px auto;
   padding:25px;
   border-radius:15px;
-  width:80%;
+  width:min(100%,900px);
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(10px);
   box-shadow:0 0 25px rgba(0,229,255,0.3);
   animation:fade 0.8s;
 }
-img{
-  width:180px;
-  margin:10px;
-  border-radius:10px;
-}
-.imagen {
-  width: 400px;
-}
-.imagen2 {
-  width: 800px;
-}
 @keyframes fade{
   from{opacity:0;transform:translateY(20px)}
   to{opacity:1;transform:translateY(0)}
+}
+@media (max-width:900px) {
+  .card { width:100%; margin:16px auto; padding:22px; }
+  button { width:100%; max-width:none; }
+  .container { padding:.75rem; }
+}
+@media (max-width:600px) {
+  header { padding:24px 16px; font-size:28px; }
+  .card { padding:18px; }
 }
 #final{
   display:none;
@@ -170,6 +185,8 @@ footer{
 <li><b>Obsolescencia de Periféricos:</b> Drivers antiguos dejan de funcionar en hardware moderno.</li>
 <li><b>Dependencias de Librerías:</b> Software que requiere versiones específicas de DLLs que no están disponibles.</li>
 </ul>
+<p><b>Incompatibilidad entre Sistemas Operativos:</b> Un programa compilado para un SO concreto no se ejecuta directamente en otro diferente. Por ejemplo, un binario de Windows no se ejecuta en Linux o macOS sin una capa de compatibilidad, y los binarios de macOS no funcionan en Windows. Incluso dentro de la misma familia, los ejecutables x86 no son compatibles con versiones ARM sin traducción.</p>
+<p><b>Dependencias de Librerías:</b> Además del binario principal, el software suele necesitar librerías específicas (DLL en Windows, .so en Linux, frameworks en macOS). Si la versión de la librería no coincide o está ausente, el programa fallará aunque el archivo ejecutable exista.</p>
 <p><b>Ejemplos de Falta de Compatibilidad:</b></p>
 <ul>
 <li>Software de Windows XP no funciona en Windows 11 64 bits sin modo de compatibilidad.</li>
@@ -184,6 +201,7 @@ footer{
 <li><b>Máquinas Virtuales:</b> Emulación de SO antiguos para ejecutar software legacy.</li>
 <li><b>Wine/Proton:</b> Capas de compatibilidad para ejecutar Windows en Linux.</li>
 <li><b>Traducción Dinámica:</b> Apple Rosetta traduce código Intel a ARM en tiempo real.</li>
+<li><b>Versiones de Librerías:</b> Instalar las librerías o redistribuibles correctos para que el programa encuentre las dependencias necesarias.</li>
 </ul>
 <img src="asset/compatibilidad.png" class="imagen">
 </div><div id="tipos" class="card">

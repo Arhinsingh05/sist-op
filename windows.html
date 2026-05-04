@@ -303,6 +303,8 @@ footer {
 @media (max-width:900px) {
   .info-grid { grid-template-columns:1fr; }
   .info-block.full-width { grid-column:auto; }
+  .card { width:100%; margin:14px auto; }
+  .imagen, .imagen2 { max-width:100%; }
 }
 @media (max-width:700px) {
   header { padding-top:2rem; }
@@ -318,6 +320,7 @@ footer {
   thead th { font-size:.7rem; padding:.7rem .6rem; }
   tbody td { padding:.7rem .6rem; }
   .modal-box { border-radius:10px; }
+  button { flex:1 1 100%; max-width:none; }
 }
 @media (max-width:420px) {
   header h1 { font-size:1.1rem; }

@@ -209,6 +209,30 @@ header .page-link:hover {
 }
 .device-card .info p { font-size:.8rem; color:#d0e2ff; line-height:1.5; }
 
+.img-thumb {
+  padding:1.5rem 1rem 0;
+  max-width:1140px;
+  margin:0 auto;
+}
+.video-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:1rem;
+  justify-content:center;
+}
+.video-row iframe {
+  width:100%;
+  max-width:560px;
+  aspect-ratio:16/9;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:#000;
+}
+.video-row iframe:nth-of-type(2) {
+  max-width:320px;
+  aspect-ratio:9/16;
+}
+
 .chars-box {
   background:var(--panel);
   border:1px solid var(--border);
@@ -249,6 +273,24 @@ header .page-link:hover {
 ::-webkit-scrollbar { width:5px; }
 ::-webkit-scrollbar-track { background:#050810; }
 ::-webkit-scrollbar-thumb { background:#1e293b; border-radius:3px; }
+
+@media (max-width:900px) {
+  header { padding:2rem 1rem 1rem; }
+  .img-thumb { padding:1.2rem .8rem 0; }
+  .video-row { gap:.85rem; }
+  .video-row iframe { max-width:100%; }
+  .panel-head { padding:1.2rem 1rem; }
+  .panel-head .yr { font-size:clamp(2.2rem,6vw,3.8rem); }
+  .devices-grid { grid-template-columns:1fr; }
+}
+@media (max-width:600px) {
+  header h1 { font-size:1.5rem; }
+  .panel-head { flex-direction:column; align-items:flex-start; }
+  .panel-head .ht { width:100%; }
+  .decade-btn { min-width:56px; padding:.5rem .55rem; }
+  .decade-btn .btn-label { font-size:.55rem; }
+  .chars-box { padding:1.2rem; }
+}
 
 </style>
 </head>
@@ -982,21 +1024,10 @@ header .page-link:hover {
 
 </header>
 <div class="img-thumb">
-    
-    <div style="display:flex; justify-content:center;">
+  <div class="video-row">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/88F9_uW3eGA?si=rqkBmTQZdsp3PAJ5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <iframe 
-        width="315" 
-        height="560"
-        src="https://www.youtube.com/embed/t9tun-kH2CI"
-        title="YouTube Short"
-        frameborder="0"
-        allowfullscreen>
-    </iframe>
-</div>
-</div>
-
-  
+    <iframe width="315" height="560" src="https://www.youtube.com/embed/t9tun-kH2CI" title="YouTube Short" frameborder="0" allowfullscreen></iframe>
+  </div>
 </div>
 <header>
   <h1> Evolución de los Sistemas Operativos</h1>
